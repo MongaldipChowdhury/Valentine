@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knew you would say yes!</title>
+
+<link rel="stylesheet" href="./yes_style.css">
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #fff0f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+.header_text {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.waiting {
+    font-size: 22px;
+    color: #555;
+}
+
+.countdown {
+    font-size: 42px;
+    font-weight: bold;
+    color: #ff3366;
+    margin: 10px 0;
+}
+
+.open-btn {
+    display: none;
+    margin-top: 20px;
+    padding: 14px 25px;
+    font-size: 18px;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.open-btn:hover {
+    background: #1ebe5d;
+}
+
+.no-click {
+    pointer-events: none;
+}
+
+.gif_container img {
+    width: 240px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 class="header_text">Ami jantam tui Yes Beche nibi 💖</h1>
+
+    <div class="gif_container">
+        <img src="assets/yes.gif" class="no-click" alt="Happy Yes">
+    </div>
+
+    <div class="waiting" id="waitingText">Waiting...</div>
+    <div class="countdown" id="countdown">5</div>
+
+    <button class="open-btn" id="openWhatsapp">
+        Open WhatsApp 💬
+    </button>
+
+</div>
+    
+<script>
+let timeLeft = 5;
+
+// তোমার WhatsApp নম্বর (country code সহ)
+const whatsappNumber = "919064074511";
+
+// আগেই লেখা মেসেজ
+const message = "I also haw feelings for you.";
+
+const countdownEl = document.getElementById("countdown");
+const waitingText = document.getElementById("waitingText");
+const btn = document.getElementById("openWhatsapp");
+
+// ✅ Android WhatsApp APP deep link
+const whatsappAppURL =
+`whatsapp://send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+
+const whatsappWebURL =
+`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+const timer = setInterval(() => {
+    timeLeft--;
+    countdownEl.textContent = timeLeft;
+
+    if (timeLeft === 0) {
+        clearInterval(timer);
+        countdownEl.style.display = "none";
+        waitingText.textContent = "Tap to open WhatsApp 💌";
+        btn.style.display = "inline-block";
+    }
+}, 1000);
+
+// 👇 User tap করলে app ওপেন হবে
+btn.addEventListener("click", () => {
+    window.location.href = whatsappAppURL;
+
+    // fallback: যদি app না খোলে
+    setTimeout(() => {
+        window.location.href = whatsappWebURL;
+    }, 1200);
+});
+</script>
+
+<!-- ❤️ Hearts Rain -->
+<script src="hearts.js"></script>
+
+</body>
+</html>
